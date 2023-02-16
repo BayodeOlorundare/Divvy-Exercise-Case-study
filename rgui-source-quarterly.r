@@ -17,10 +17,10 @@ getwd() #displays your working directory
 #=====================
 # Upload Divvy datasets (csv files) here
 
-q2_2019 = read.csv("C:\\Users\\bayod\\OneDrive\\Documents\\Work\\Divvy_quarterly\\Divvy_Trips_2019_Q2.csv")
-q3_2019 = read.csv("C:\\Users\\bayod\\OneDrive\\Documents\\Work\\Divvy_quarterly\\Divvy_Trips_2019_Q3.csv")
-q4_2019 = read.csv("C:\\Users\\bayod\\OneDrive\\Documents\\Work\\Divvy_quarterly\\Divvy_Trips_2019_Q4.csv")
-q1_2020 = read.csv("C:\\Users\\bayod\\OneDrive\\Documents\\Work\\Divvy_quarterly\\Divvy_Trips_2020_Q1.csv")
+q2_2019 = read.csv("..\\Divvy_Trips_2019_Q2.csv")
+q3_2019 = read.csv("..\\Divvy_Trips_2019_Q3.csv")
+q4_2019 = read.csv("..\\Divvy_Trips_2019_Q4.csv")
+q1_2020 = read.csv("..\\Divvy_Trips_2020_Q1.csv")
 
 #====================================================
 # STEP 3: WRANGLE DATA
@@ -290,4 +290,4 @@ all_trips_v2 %>%
 # Create a csv file that we will visualize in Excel, Tableau, or my presentation software
 # N.B.: This file location is for a Mac. If you are working on a PC, change the file location accordingly (most likely "C:\Users\YOUR_USERNAME\Desktop\...") to export the data. You can read more here: https://datatofish.com/export-dataframe-to-csv-in-r/
 counts <- aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
-write.csv(counts, file = 'C:\\Users\\bayod\\OneDrive\\Documents\\Work\\Divvy_quarterly\\avg_ride_length.csv')
+write.csv(counts, file = '..\\avg_ride_length.csv')
