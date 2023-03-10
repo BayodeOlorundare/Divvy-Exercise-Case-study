@@ -119,7 +119,7 @@ all_trips <- bind_rows(q2_2019, q3_2019, q4_2019, q1_2020)
 ```
 
 ```R
-# Remove lat, long, birthyear, and gender fields so ll quarterly data consistent
+# Remove lat, long, birthyear, and gender fields so all quarterly data consistent
 all_trips <- all_trips %>%  
   select(-c(start_lat, start_lng, end_lat, end_lng, birthyear, gender, tripduration))
 ```
