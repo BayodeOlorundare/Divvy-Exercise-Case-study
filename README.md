@@ -1,9 +1,9 @@
 ![This is an image](https://bayodeolorundare.com/wp-content/uploads/2023/02/tableau_hero.jpg)
 
-# Divvy-Exercise-Case-study
+# Divvy Exercise Case Study
 *Google Data Analyst Capstone Project*
 
-The purpose of this notebook is to conduct an analysis for the Google Data Analysis Capstone Project on Coursera. In this case study I was provided data from a bike-share company called Divvy. For the purpose of this exercise, and from now on, Divvy will be referred to as Cyclistic. In this exercise, I work for a fictional company, Cyclistic. In order to answer the key business questions, I will follow the steps of the Data Analysis Process: Act, Prepare, Process, Analyze, Share and Act.
+The purpose of this notebook is to conduct an analysis for the Google Data Analysis Capstone Project on Coursera. In this case study I was provided data from a bike-share company called Divvy. For the purpose of this exercise, and from now on, Divvy will be referred to as Cyclistic. In this exercise, I work for a fictional company, Cyclistic. In order to answer the key business questions, I will follow the steps of the Data Analysis Process: Act, Prepare, Process, Analyze, Share, and Act.
 
 **The Business Task**
 
@@ -11,7 +11,7 @@ To deliver recommendations by analyzing the 2019 - 2020 trip data for Cyclistic 
 
 **Description of Data Sources Used**
 
-I used twelve-months of historical trip dataset provided by Cyclistic to perform this analysis. This includes four different files each containing a quarterly (3 months) of data ranging from April 2019 - March 2020. The data is public and has been made available by Motivate International Inc. under this [License](https://ride.divvybikes.com/data-license-agreement).
+I used twelve-months of the historical trip dataset provided by Cyclistic to perform this analysis. This includes four different files each containing a quarterly (3 months) of data ranging from April 2019 - March 2020. The data is public and has been made available by Motivate International Inc. under this [License](https://ride.divvybikes.com/data-license-agreement).
 
 **Data Cleaning and Manipulation**
 
@@ -48,8 +48,8 @@ q1_2020 = read.csv("../Divvy_Trips_2020_Q1.csv")
 ## STEP 2: WRANGLE DATA AND COMBINE INTO A SINGLE FILE
 
 ```R
-# Compare column names each of the files
-# While the names don't have to be in the same order, 
+# Compare column names of each of the files
+# while the names don't have to be in the same order, 
 # they DO need to match perfectly before we can use a command to join them into one file
 colnames(q3_2019)
 colnames(q4_2019)
@@ -59,7 +59,7 @@ colnames(q1_2020)
 
 ```R
 # Rename columns  to make them consistent with q1_2020 
-# (as this will be the supposed going-forward table design for Divvy)
+# (as this will be the supposed table format design for Divvy)
 
  (q4_2019 <- rename(q4_2019
                   ,ride_id = trip_id
@@ -151,12 +151,12 @@ summary(all_trips)  #Statistical summary of data. Mainly for numerics
 There are a few problems we will need to fix:
 1. In the "member_casual" column, there are two names for members ("member" and "Subscriber") and two names for casual riders ("Customer" and "casual"). We will need to consolidate that from four to two labels.
 1. The data can only be aggregated at the ride-level, which is too granular. We will want to add some additional columns of data -- such as day, month, year -- that provide additional opportunities to aggregate the data.
-1. We will want to add a calculated field for length of ride since the 2020Q1 data did not have the "tripduration" column. We will add "ride_length" to the entire dataframe for consistency.
-1. There are some rides where tripduration shows up as negative, including several hundred rides where Divvy took bikes out of circulation for Quality Control reasons. We will want to delete these rides.
+1. We will want to add a calculated field for length of ride since the 2020 Q1 data did not have the "tripduration" column. We will add "ride_length" to the entire dataframe for consistency.
+1. There are some rides where tripduration shows up as negative, including several hundred rides where Divvy took bikes out of circulation for Quality Control reasons. We will want to omit these rides.
 
 ```R
 # In the "member_casual" column, replace "Subscriber" with "member" and "Customer" with "casual"
-# Before 2020, Divvy used different labels for these two types of riders ... we will want to make our dataframe consistent with their current nomenclature
+# Before 2020, Divvy used different labels for these two types of riders...we will want to make our dataframe consistent with their current nomenclature
 # N.B.: "Level" is a special property of a column that is retained even if a subset does not contain any values from a specific level
 # Begin by seeing how many observations fall under each usertype
 
@@ -176,7 +176,7 @@ table(all_trips$member_casual)
 
 ```R
 # Add columns that list the date, month, day, and year of each ride
-# This will allow us to aggregate ride data for each month, day, or year ... before completing these operations we could only aggregate at the ride level
+# This will allow us to aggregate ride data for each month, day, or year...before completing these operations we could only aggregate at the ride level
 # https://www.statmethods.net/input/dates.html more on date formats in R found at that link
 all_trips$date <- as.Date(all_trips$started_at) #The default format is yyyy-mm-dd
 all_trips$month <- format(as.Date(all_trips$date), "%m")
@@ -332,7 +332,7 @@ all_trips_v2 %>%
 
 ## Summary
 
-casual riders tend to have fewer trips during the weekday than annual members. 
+Casual riders tend to have fewer trips during the weekday than annual members. 
 We believe this is due to members taking more rides to and from work. 
 We suggest increasing casual riders weekday trips by advertsing at work communute hours (07:00 - 09:00 and 16:00 - 18:00).
 
@@ -346,8 +346,9 @@ During our analysis we needed to clean the data performing the following tasks:
 * added additional columns of data that provided additional oppertunities to aggregate data
 * added calulcated field for length of ride for all data
 * removed ride durations that were negative
+* removed null or empty values
 * aggregate data to show mean, median, max and min for casual and member riders for analysis
 
 The issues mentioned could have affected the intrgity of this analysis, and we recommend looking into the source of the these problems.
 
-[Kaggle Notebook](https://www.kaggle.com/code/bayodeolorundare/divvy-exercise-case-study?scriptVersionId=119403583) // [Tableau Viz](https://public.tableau.com/app/profile/bayode.olorundare/viz/CasestudyCyclingridertrends/DayofWeekBreakdown) // [Looker Datastudio](https://lookerstudio.google.com/u/0/reporting/e2a64c12-36f6-4879-8441-9cd67f9f9bfc/page/tEnnC)
+[Kaggle Notebook](https://www.kaggle.com/code/bayodeolorundare/divvy-exercise-case-study?scriptVersionId=119403583) // [Tableau Viz](https://public.tableau.com/app/profile/bayode.olorundare/viz/CasestudyCyclingridertrends/DayofWeekBreakdown) // [Looker Datastudio](https://lookerstudio.google.com/u/0/reporting/e2a64c12-36f6-4879-8441-9cd67f9f9bfc/page/tEnnC) // [Python Repository](https://github.com/BayodeOlorundare/Divvy-Exercise-Case-study-Python)
